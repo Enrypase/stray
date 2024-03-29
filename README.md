@@ -1,4 +1,4 @@
-# STRAY ![Drag Racing](stray.thug.cat.jpg)
+# STRAY 
 ***extending conversations, shrinking miscommunication.***
 
 The go-to extension for every website, providing chat functionality to ensure privacy, facilitate engaging conversations, and beyond. 
@@ -53,5 +53,5 @@ We propose a comprehensive solution to address these challenges. Our extension e
 - **Fingerprint Login:** Enhancing security with fingerprint login authentication for seamless access.
 - **Fund Transfer Capability:**  Enabling users to transfer funds directly within the chat interface, facilitating seamless transactions.
 
-
+![Drag Racing](stray.thug.cat.png)
 
