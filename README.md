@@ -3,11 +3,11 @@
 
 The go-to extension for every website, providing chat functionality to ensure privacy, facilitate engaging conversations, and beyond. 
 
-### PROBLEM
+### :space_invader: PROBLEM
 Current chat systems suffer from several limitations: they lack domain-specific functionality, resulting in a disconnect between users and their intended audience.
 User interaction is limited, hindering meaningful engagement beyond basic messaging, users have concerns regarding privacy; and many existing systems lack the engaging elements modern users seek, resulting in disinterest. Moreover, some websites don't even offer chat systems, further limiting user interaction and engagement possibilities.
 
-### SOLUTION
+### :crystal_ball: SOLUTION
 We propose a comprehensive solution to address these challenges. Our extension empowers domain owners to create tailored chats, fostering community-building and collaboration. Enhanced user interaction features, such as message reactions, facilitate dynamic conversations. An efficient notification system ensures timely responses and reduces information overload. Privacy and security are prioritized through private chat functionalities. Additionally, we will integrate gamification elements to create an entertaining and interactive chat experience, captivating users and fostering deeper connections.
 
 ### ISSUES STRAY WILL SOLVE
