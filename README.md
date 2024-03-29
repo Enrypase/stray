@@ -22,6 +22,28 @@ We propose a comprehensive solution to address these challenges. Our extension e
 <br>:space_invader:***Lack of Engaging Chat Experience:*** Many existing chat systems lack the interactive and gamified elements that appeal to modern users, resulting in a disconnect and disinterest among users who seek more engaging and entertaining communication platforms.
 <br>:crystal_ball:***Creating an Entertaining and Interactive Chat Experience:*** Stray is to redefine online communication by seamlessly integrating interactive and gamified elements. We aim to provide users with a captivating and entertaining experience that fosters deeper connections and active engagement.
 
+### FLOW
+- **Open Extension:**
+<br>- User opens the Stray Chat extension
+<br>- The extension interface is displayed
+- **Connect Wallet:**
+<br>- Users are prompted to connect their wallet (e.g., MetaMask) to the extension
+<br>- Upon connecting, the extension verifies wallet details and related accesses
+- **User Interaction:**
+<br> ***If the user is a regular user:***
+<br>- They are directed to available chats within the domain they are browsing
+<br>- They can view and participate in existing chats
+<br>- They have the option to direct message specific users
+<br> ***If the user is a domain owner:***
+<br>- Join existing chats within their domain
+<br>- Create new chats tailored to their audience
+<br>- Delete or edit existing chats (excluding the global chat)
+- **Direct Messaging:**
+<br>- Users have the ability to initiate direct messages with specific users within the chat platform
+
+ *This flow ensures a seamless experience for both regular users and domain owners, providing tailored features based on their roles within the extension*
+
+
 ### ARCHITECTURE
 
 ### FUTURE DEVELOPMENTS
