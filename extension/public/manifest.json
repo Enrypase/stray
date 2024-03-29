@@ -8,7 +8,7 @@
       "default_popup": "index.html",
       "default_title": "open",
       "default_icon": {
-        "192": "logo192.png"
+        "192": "logo.png"
       }
     },
     "permissions": [
@@ -21,8 +21,7 @@
     ],
     "host_permissions": [
       "https://*/*",
-      "http://*/*",
-      "*"
+      "http://*/*"
     ]
   }
   

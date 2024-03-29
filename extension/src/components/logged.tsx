@@ -1,9 +1,10 @@
-import { Component, For, createEffect, createSignal, onCleanup } from "solid-js";
+import { Component, For, Suspense, createEffect, createSignal, onCleanup } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useSession } from "../hooks/useSession";
 import { beautifyAddress, beautifyUrl } from "../common/commonFunctions";
+import gattoFiero from "../assets/images/gattoFiero.avif";
 
-type MessageType = { username: string; message: string };
+type MessageType = { username: string; message: string; image: string };
 
 const LoggedComp: Component = () => {
   const { address, location } = useSession();
@@ -43,6 +44,7 @@ const LoggedComp: Component = () => {
       setMessages("messages", messages.messages.length, {
         username: messageData.username === address() ? "me" : messageData.username,
         message: messageData.message,
+        image: messageData.image,
       });
     };
 
@@ -91,18 +93,27 @@ const LoggedComp: Component = () => {
       <div class="w-[325px] border-b-2 border-solid border-white p-2">
         <p class="text-center">Chat: {beautifyUrl(location())}</p>
       </div>
-      <div class="flex flex-col justify-between h-full">
+      <div class="flex flex-col justify-between h-[calc(100%-42px)]">
         <div class="flex flex-col gap-2 overflow-auto p-2">
           <For each={messages.messages}>
-            {message => (
-              <div class="grid grid-cols-2">
-                <div class="flex gap-2 items-center">
-                  <img src="h-20 w-20 rounded-xl" alt="PFP" />
-                  <p class="font-bold">{beautifyAddress(message.username)}:</p>
+            {message => {
+              console.log("Rec", message);
+              return (
+                <div class="grid grid-cols-2">
+                  <div class="flex gap-2 items-start">
+                    {message.username.toLowerCase() !== "server" && (
+                      <img
+                        src={message.image || gattoFiero}
+                        class="h-8 aspect-[707/789] rounded-xl"
+                        alt="PFP"
+                      />
+                    )}
+                    <p class="font-bold">{beautifyAddress(message.username)}:</p>
+                  </div>
+                  <p>{message.message}</p>
                 </div>
-                <p>{message.message}</p>
-              </div>
-            )}
+              );
+            }}
           </For>
         </div>
         <form

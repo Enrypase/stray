@@ -2,17 +2,26 @@ import { createPublicClient, http, type Address } from "viem";
 import { mainnet } from "viem/chains";
 import { beautifyAddress } from "./common/commonFunctions";
 import { createClient } from "redis";
+import { normalize } from "viem/ens";
 
 type Usernames = {
   [key: string]: {
     ready: boolean;
     username: string;
     chat: string;
+    image: string;
   };
 };
-type MessageType = { username: string; message: string; timestamp: number };
+type MessageType = { username: string; message: string; timestamp: number; image: string };
 
-const usernames: Usernames = { server: { ready: true, username: "server", chat: "" } };
+const usernames: Usernames = {
+  server: {
+    ready: true,
+    username: "server",
+    chat: "",
+    image: "http://localhost:5000/gattoFiero.avif",
+  },
+};
 
 const client = createPublicClient({
   chain: mainnet,
@@ -32,6 +41,14 @@ const parseUsername = async (address: string) => {
   return name || address;
 };
 
+const getUserImage = async (address: string) => {
+  const ensAvatar = await client.getEnsAvatar({
+    name: normalize(address),
+  });
+  console.log("ENS: ", ensAvatar);
+  return ensAvatar;
+};
+
 const getUsername = (username: string, short: boolean) => {
   const retUsername = usernames[username]?.username;
   if (usernames[username].ready) {
@@ -49,16 +66,19 @@ const server = Bun.serve<{ username: string }>({
       const username = req.headers.get("sec-websocket-protocol");
       let success = false;
       if (username) {
-        usernames[username] = { ready: false, username, chat };
+        usernames[username] = { ready: false, username, chat, image: "" };
         parseUsername(username).then(newUsername => {
-          usernames[username] = { ready: true, username: newUsername, chat };
-          server.publish(
-            chat,
-            JSON.stringify({
-              username: "Server",
-              message: `${getUsername(newUsername, true)} connected`,
-            })
-          );
+          getUserImage(newUsername).then(image => {
+            usernames[username] = { ready: true, username: newUsername, chat, image: image || "" };
+            server.publish(
+              chat,
+              JSON.stringify({
+                username: "Server",
+                message: `${getUsername(newUsername, true)} connected`,
+                image: image,
+              })
+            );
+          });
         });
         success = server.upgrade(req, { data: { username: username } });
       }
@@ -89,6 +109,7 @@ const server = Bun.serve<{ username: string }>({
           username: getUsername(username, false)!,
           message,
           timestamp: Date.now(),
+          image: usernames[ws.data.username].image,
         };
         server.publish(chat, JSON.stringify(finalMessage));
         redis.hGet("chats", chat).then(rawData => {
