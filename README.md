@@ -10,7 +10,7 @@ User interaction is limited, hindering meaningful engagement beyond basic messag
 ### :crystal_ball: SOLUTION
 We propose a comprehensive solution to address these challenges. Our extension empowers domain owners to create tailored chats, fostering community-building and collaboration. Enhanced user interaction features, such as message reactions, facilitate dynamic conversations. An efficient notification system ensures timely responses and reduces information overload. Privacy and security are prioritized through private chat functionalities. Additionally, we will integrate gamification elements to create an entertaining and interactive chat experience, captivating users and fostering deeper connections.
 
-### :panic: ISSUES STRAY WILL SOLVE
+### 🙀: ISSUES STRAY WILL SOLVE
 :space_invader: ***Lack of Domain-specific Chat Functionality:*** Current chat systems often provide only global chat functionality, lacking the ability for domain owners to create official additional chats tailored to their specific audience or purpose.
 <br>:crystal_ball: ***Domain-specific Chat Creation:*** We develop an extension where domain owners can easily create official additional chats specific to their domain, allowing them to curate discussions, events, or topics relevant to their audience.
 <br>:space_invader:***Limited User Interaction and Engagement:*** Users often face challenges in engaging with chat content beyond basic messaging, such as reacting to messages, which limits their ability to express opinions and contribute meaningfully.
