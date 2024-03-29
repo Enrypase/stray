@@ -28,7 +28,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 <br>- The extension interface is displayed
 - **Connect Wallet:**
 <br>- Users are prompted to connect their wallet (e.g., MetaMask) to the extension
-<br>- Upon connecting, the extension verifies wallet details and related accesses
+<br>- Upon connecting, the extension verifies wallet details and related accesses permitted
 - ***User Interaction:***
 <br> **If the user is a regular user:**
 <br>- They are directed to available chats within the domain they are browsing
