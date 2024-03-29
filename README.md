@@ -22,7 +22,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 <br>:space_invader:***Lack of Engaging Chat Experience:*** Many existing chat systems lack the interactive and gamified elements that appeal to modern users, resulting in a disconnect and disinterest among users who seek more engaging and entertaining communication platforms.
 <br>:crystal_ball:***Creating an Entertaining and Interactive Chat Experience:*** Stray is to redefine online communication by seamlessly integrating interactive and gamified elements. We aim to provide users with a captivating and entertaining experience that fosters deeper connections and active engagement.
 
-### FLOW
+### :cyclone: FLOW
 - **Open Extension:**
 <br>- User opens the Stray Chat extension
 <br>- The extension interface is displayed
@@ -44,9 +44,9 @@ We propose a comprehensive solution to address these challenges. Our extension e
  *This flow ensures a seamless experience for both regular users and domain owners, providing tailored features based on their roles within the extension.*
 
 
-### ARCHITECTURE
+### :building_construction: ARCHITECTURE
 
-### PARTNERSHIPS AND MONETIZATION
+### :fist_right: :fist_left: PARTNERSHIPS AND MONETIZATION
 - ***Protocol and Project Partnerships:***
 <br>- Stray Chat aims to partner with various protocols and projects to incentivize user engagement. For instance, active users during specified times in the chat may receive airdrops or rewards in collaboration with partner projects.
 <br>- These partnerships not only enhance user engagement but also provide added value to partner projects by streamlining communication. Projects can utilize Stray Chat as their primary communication platform, eliminating the need for separate messaging platforms like Telegram or Discord. This ensures that website traffic remains uninterrupted, while users can trust the legitimacy of information and sources within the chat.
@@ -55,7 +55,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 <br>- Potential monetization strategies include offering premium features or subscription models for advanced functionalities, providing customization options, or integrating sponsored content or advertisements in a non-intrusive manner.
 <br>- By offering value-added features and services, Stray Chat can generate revenue while remaining accessible and beneficial to its users and partner projects.
 
-### FUTURE DEVELOPMENTS
+### :rocket: FUTURE DEVELOPMENTS
 - ***Incorporating Gamification and Interactivity:*** we will develop a chat system that incorporates gamification features such as avatars, badges, and airdrops rewards.
 - ***Radio Function:*** Adding a radio feature for users to listen to music or podcasts while chatting.
 - ***Mood-based Themes & Styles:***  Introducing customizable themes and styles based on users' moods, ensuring a personalized chat experience.
