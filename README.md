@@ -41,7 +41,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 - **Direct Messaging:**
 <br>- Users have the ability to initiate direct messages with specific users within the chat platform
 
- *This flow ensures a seamless experience for both regular users and domain owners, providing tailored features based on their roles within the extension*
+ *This flow ensures a seamless experience for both regular users and domain owners, providing tailored features based on their roles within the extension.*
 
 
 ### ARCHITECTURE
