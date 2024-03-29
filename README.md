@@ -1,5 +1,5 @@
 # STRAY 
-***extending conversations, shrinking miscommunication.***
+***Extending conversations, shrinking miscommunication.***
 
 The go-to extension for every website, providing chat functionality to ensure privacy, facilitate engaging conversations, and beyond. 
 
