@@ -51,7 +51,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 <br>- Stray Chat aims to partner with various protocols and projects to incentivize user engagement. For instance, active users during specified times in the chat may receive airdrops or rewards in collaboration with partner projects.
 <br>- These partnerships not only enhance user engagement but also provide added value to partner projects by streamlining communication. Projects can utilize Stray Chat as their primary communication platform, eliminating the need for separate messaging platforms like Telegram or Discord. This ensures that website traffic remains uninterrupted, while users can trust the legitimacy of information and sources within the chat.
 - ***Open Source with Additional Monetization Features:***
-<br>- While Stray Chat will be open source, additional features can be developed and implemented to ensure its financial sustainability and monetization
+<br>- While Stray Chat will be open source, additional features can be developed and implemented to ensure its financial sustainability and monetization.
 <br>- Potential monetization strategies include offering premium features or subscription models for advanced functionalities, providing customization options, or integrating sponsored content or advertisements in a non-intrusive manner.
 <br>- By offering value-added features and services, Stray Chat can generate revenue while remaining accessible and beneficial to its users and partner projects.
 
