@@ -1,6 +1,5 @@
 import { Accessor, Component, Setter, createContext, createEffect, createSignal } from "solid-js";
 import { WithChildren } from "../types/global";
-import { WalletClient } from "viem";
 
 type SessionContextType = {
   address: Accessor<string>;

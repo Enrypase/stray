@@ -2,6 +2,7 @@ import { Accessor, Component, Setter } from "solid-js";
 import { useSession } from "../hooks/useSession";
 import { beautifyAddress, beautifyBigText } from "../common/commonFunctions";
 import gattoFiero from "../assets/images/gattoFiero.avif";
+import { useChat } from "../hooks/useChat";
 
 type MessageType = {
   username: string;
@@ -9,11 +10,12 @@ type MessageType = {
   image: string;
   lastMessage: Accessor<string>;
   setLastMessage: Setter<string>;
-  inputRef: HTMLInputElement;
+  inputRef: Accessor<HTMLInputElement | null>;
 };
 
 const Message: Component<MessageType> = props => {
   const { address } = useSession();
+  const { setTab, setPrivateChats, privateChats } = useChat();
   return (
     <div
       class="grid grid-cols-2 p-2 rounded-md"
@@ -21,7 +23,16 @@ const Message: Component<MessageType> = props => {
         "bg-blue": props.message.includes(`@${address()}`),
       }}>
       <div class="flex items-start">
-        <div class="flex gap-2  items-center">
+        <button
+          class="flex gap-2 items-center"
+          onClick={() => {
+            if (props.username.toLowerCase() === "me") return;
+            setTab(props.username);
+            setPrivateChats(prev => [
+              ...prev,
+              { with: props.username, image: props.image || gattoFiero },
+            ]);
+          }}>
           {props.username.toLowerCase() !== "server" && (
             <img
               src={props.image || gattoFiero}
@@ -36,12 +47,12 @@ const Message: Component<MessageType> = props => {
             }}>
             {beautifyAddress(props.username)}:
           </p>
-        </div>
+        </button>
       </div>
       <button
         onClick={() => {
           if (props.username.toLowerCase() === "me") return;
-          props.inputRef?.focus();
+          props.inputRef()?.focus();
           props.setLastMessage(`@${props.username} ${props.lastMessage()}`);
         }}>
         <p class="break-words text-left">{beautifyBigText(props.message)}</p>

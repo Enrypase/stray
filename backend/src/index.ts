@@ -53,7 +53,6 @@ const getUserImage = async (address: string) => {
   const ensAvatar = await client.getEnsAvatar({
     name: normalize(address),
   });
-  console.log("ENS: ", ensAvatar);
   return ensAvatar;
 };
 
@@ -69,35 +68,54 @@ const server = Bun.serve<{ username: string }>({
   async fetch(req, server) {
     const url = new URL(req.url);
     if (url.pathname.includes("/chat")) {
-      let chat = url.pathname.split("/")[2];
-      chat ? chat : "";
       const username = req.headers.get("sec-websocket-protocol");
       let success = false;
       if (username) {
-        usernames[username] = { ready: false, username, chat, image: "" };
+        const chatWith = url.searchParams.get("chatWith");
+        console.log("Chatting with: ", chatWith);
+        const updatedUsername = chatWith ? username : `${username}_${Date.now()}`;
+        let chat = url.pathname.split("/")[2] || "";
+        if (chatWith) {
+          const foundChat = Object.keys(privateChats).filter(
+            key => key.includes(username) && key.includes(chatWith)
+          )[0];
+          chat = foundChat || `${username} ${chatWith}`;
+          if (!foundChat) {
+            privateChats[chat] = { messages: [] };
+          }
+        }
+        console.log("-------- ", chat, "--------");
+        usernames[updatedUsername] = { ready: false, username, chat, image: "" };
         parseUsername(username).then(newUsername => {
           getUserImage(newUsername).then(image => {
-            usernames[username] = { ready: true, username: newUsername, chat, image: image || "" };
+            console.log("\n\n\n\n\n");
+            console.log("Sending connection mex to chat: ", chat);
+            console.log("\n\n\n\n\n");
+
+            usernames[updatedUsername] = {
+              ready: true,
+              username: newUsername,
+              chat,
+              image: image || "",
+            };
             server.publish(
               chat,
               JSON.stringify({
                 username: "Server",
-                message: `${getUsername(newUsername, true)} connected`,
+                message: `${getUsername(updatedUsername, true)} connected`,
                 image: image,
               })
             );
           });
         });
-        const data: WsData = { username };
-        const chatWith = url.pathname.split("?chatWith=")[1];
+        const data: WsData = { username: updatedUsername };
+        console.log("Requested to chat with: ", chatWith, data.username);
         if (chatWith) {
-          const withUser = Object.keys(usernames).filter(
-            user => chatWith === usernames[user].username
-          )[0];
-          console.log("Bro wants to chat with ", withUser);
+          console.log(usernames);
+          const withUser = Object.keys(usernames)
+            .filter(user => chatWith === usernames[user].username)[0]
+            .split("_")[0];
           data.chatWith = withUser;
-        } else {
-          data.username = `${data.username}_${Date.now()}`;
         }
         success = server.upgrade(req, { data });
       }
@@ -109,16 +127,14 @@ const server = Bun.serve<{ username: string }>({
       const { chatWith } = ws.data;
       console.log("This ws wants to chat with ", chatWith);
       if (chatWith) {
-        ws.subscribe(`${ws.data.username} ${chatWith}`);
         const chat = Object.keys(privateChats).filter(
           key => key.includes(ws.data.username) && key.includes(chatWith)
         )[0];
+        console.log("Private Chats: ");
+        console.log(privateChats);
+        ws.subscribe(chat);
         privateChats[chat].messages.map(rawData => {
-          const messages: MessageType[] = JSON.parse(rawData);
-          console.log("Open: ", rawData, "Mexs:", messages);
-          messages.map(message => {
-            ws.send(JSON.stringify(message));
-          });
+          ws.send(rawData);
         });
         return;
       }
@@ -127,7 +143,6 @@ const server = Bun.serve<{ username: string }>({
       redis.hGet("chats", chat).then(rawData => {
         if (!rawData) return;
         const messages: MessageType[] = JSON.parse(rawData);
-        console.log("Open: ", rawData, "Mexs:", messages);
         messages.map(message => {
           ws.send(JSON.stringify(message));
         });
@@ -143,6 +158,7 @@ const server = Bun.serve<{ username: string }>({
           const chat = Object.keys(privateChats).filter(
             key => key.includes(ws.data.username) && key.includes(chatWith)
           )[0];
+          console.log("Found common chat: ", chat);
           const finalMessage: MessageType = {
             username: getUsername(username, false)!,
             message,
@@ -153,6 +169,7 @@ const server = Bun.serve<{ username: string }>({
           const oldMexs = privateChats[chat].messages;
           oldMexs.push(JSON.stringify(finalMessage));
           privateChats[chat].messages = oldMexs;
+          return;
         }
         console.log("Username: " + username);
         const chat = usernames[username].chat;

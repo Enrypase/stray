@@ -12,7 +12,8 @@ export const beautifyUrl = (url: string): string =>
     .split("/")
     .map(el => el.split(":")[0])
     .map(el => el.split("?")[0])
-    .join(" > ");
+    .filter(el => el)
+    .join("/");
 
 export const beautifyBigText = (text: string): string =>
   text
