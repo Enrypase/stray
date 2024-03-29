@@ -1,8 +1,8 @@
-import { Component, For, Suspense, createEffect, createSignal, onCleanup } from "solid-js";
+import { Component, For, createEffect, createSignal, onCleanup } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useSession } from "../hooks/useSession";
 import { beautifyAddress, beautifyUrl } from "../common/commonFunctions";
-import gattoFiero from "../assets/images/gattoFiero.avif";
+import Message from "./message";
 
 type MessageType = { username: string; message: string; image: string };
 
@@ -10,11 +10,12 @@ const LoggedComp: Component = () => {
   const { address, location } = useSession();
   let queue: string[] = [];
   const [isReady, setReady] = createSignal(false);
+  let inputRef: HTMLInputElement | null = null;
 
   const [messages, setMessages] = createStore({
     messages: [] as MessageType[],
   });
-  const [lastMesage, setLastMessage] = createSignal("");
+  const [lastMessage, setLastMessage] = createSignal("");
   const createNewWs = () => {
     const newWs = new WebSocket(`ws://localhost:5000/chat/${beautifyUrl(location())}`, [address()]);
 
@@ -94,24 +95,18 @@ const LoggedComp: Component = () => {
         <p class="text-center">Chat: {beautifyUrl(location())}</p>
       </div>
       <div class="flex flex-col justify-between h-[calc(100%-42px)]">
-        <div class="flex flex-col gap-2 overflow-auto p-2">
+        <div class="flex flex-col gap-2 overflow-auto">
           <For each={messages.messages}>
             {message => {
               console.log("Rec", message);
+              console.log(address(), message.message.includes(`@${address()}`));
               return (
-                <div class="grid grid-cols-2">
-                  <div class="flex gap-2 items-start">
-                    {message.username.toLowerCase() !== "server" && (
-                      <img
-                        src={message.image || gattoFiero}
-                        class="h-8 aspect-[707/789] rounded-xl"
-                        alt="PFP"
-                      />
-                    )}
-                    <p class="font-bold">{beautifyAddress(message.username)}:</p>
-                  </div>
-                  <p>{message.message}</p>
-                </div>
+                <Message
+                  {...message}
+                  lastMessage={lastMessage}
+                  setLastMessage={setLastMessage}
+                  inputRef={inputRef!}
+                />
               );
             }}
           </For>
@@ -120,14 +115,15 @@ const LoggedComp: Component = () => {
           class="w-[325px] border-t-2 border-solid border-white p-2"
           onSubmit={e => {
             e.preventDefault();
-            const message = JSON.stringify({ type: "message", message: lastMesage() });
+            const message = JSON.stringify({ type: "message", message: lastMessage() });
             sendMessage(message);
           }}>
           <div class="flex justify-between gap-2 py-1 px-2 border-2 border-solid border-white rounded-full overflow-hidden">
             <input
+              ref={inputRef!}
               class="w-full bg-black border-none px-2 py-0.5 outline-none"
               placeholder="let's get straight into it"
-              value={lastMesage()}
+              value={lastMessage()}
               onChange={e => setLastMessage(e.target.value)}
               type="text"
             />

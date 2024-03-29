@@ -4,6 +4,10 @@ import { beautifyAddress } from "./common/commonFunctions";
 import { createClient } from "redis";
 import { normalize } from "viem/ens";
 
+type WsData = {
+  username: string;
+  chatWith?: string;
+};
 type Usernames = {
   [key: string]: {
     ready: boolean;
@@ -13,6 +17,9 @@ type Usernames = {
   };
 };
 type MessageType = { username: string; message: string; timestamp: number; image: string };
+type PrivateChats = {
+  [key: string]: { messages: string[] };
+};
 
 const usernames: Usernames = {
   server: {
@@ -22,6 +29,7 @@ const usernames: Usernames = {
     image: "http://localhost:5000/gattoFiero.avif",
   },
 };
+const privateChats: PrivateChats = {};
 
 const client = createPublicClient({
   chain: mainnet,
@@ -80,13 +88,40 @@ const server = Bun.serve<{ username: string }>({
             );
           });
         });
-        success = server.upgrade(req, { data: { username: username } });
+        const data: WsData = { username };
+        const chatWith = url.pathname.split("?chatWith=")[1];
+        if (chatWith) {
+          const withUser = Object.keys(usernames).filter(
+            user => chatWith === usernames[user].username
+          )[0];
+          console.log("Bro wants to chat with ", withUser);
+          data.chatWith = withUser;
+        } else {
+          data.username = `${data.username}_${Date.now()}`;
+        }
+        success = server.upgrade(req, { data });
       }
       return success ? undefined : new Response("WebSocket upgrade error", { status: 400 });
     }
   },
   websocket: {
     open(ws) {
+      const { chatWith } = ws.data;
+      console.log("This ws wants to chat with ", chatWith);
+      if (chatWith) {
+        ws.subscribe(`${ws.data.username} ${chatWith}`);
+        const chat = Object.keys(privateChats).filter(
+          key => key.includes(ws.data.username) && key.includes(chatWith)
+        )[0];
+        privateChats[chat].messages.map(rawData => {
+          const messages: MessageType[] = JSON.parse(rawData);
+          console.log("Open: ", rawData, "Mexs:", messages);
+          messages.map(message => {
+            ws.send(JSON.stringify(message));
+          });
+        });
+        return;
+      }
       const chat: string = usernames[ws.data.username].chat;
       ws.subscribe(chat);
       redis.hGet("chats", chat).then(rawData => {
@@ -102,7 +137,23 @@ const server = Bun.serve<{ username: string }>({
       const { type, message } = JSON.parse(String(rawMex));
       if (type === "auth") {
       } else if (type === "message") {
-        const { username } = ws.data;
+        const { username, chatWith } = ws.data;
+        console.log("This ws wants to send message exclusively to ", chatWith);
+        if (chatWith) {
+          const chat = Object.keys(privateChats).filter(
+            key => key.includes(ws.data.username) && key.includes(chatWith)
+          )[0];
+          const finalMessage: MessageType = {
+            username: getUsername(username, false)!,
+            message,
+            timestamp: Date.now(),
+            image: usernames[ws.data.username].image,
+          };
+          server.publish(chat, JSON.stringify(finalMessage));
+          const oldMexs = privateChats[chat].messages;
+          oldMexs.push(JSON.stringify(finalMessage));
+          privateChats[chat].messages = oldMexs;
+        }
         console.log("Username: " + username);
         const chat = usernames[username].chat;
         const finalMessage: MessageType = {
@@ -121,6 +172,15 @@ const server = Bun.serve<{ username: string }>({
       }
     },
     close(ws) {
+      const { chatWith } = ws.data;
+      console.log("Blud closed the chat with ", chatWith);
+      if (chatWith) {
+        const chat = Object.keys(privateChats).filter(
+          key => key.includes(ws.data.username) && key.includes(chatWith)
+        )[0];
+        ws.unsubscribe(chat);
+        return;
+      }
       const message = `${getUsername(ws.data.username, true)} has left the chat`;
       ws.unsubscribe(usernames[ws.data.username].chat);
       server.publish(
