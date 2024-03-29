@@ -12,6 +12,18 @@ We propose a comprehensive solution to address these challenges. Our extension e
 
 ### SOME PROBLEMS STRAY WILL SOLVE
 <br>:space_invader: ***Lack of Domain-specific Chat Functionality:*** Current chat systems often provide only global chat functionality, lacking the ability for domain owners to create official additional chats tailored to their specific audience or purpose.
-<br>:crystal_ball: ***Domain-specific Chat Creation:*** We develop an extension where domain owners can easily create official additional chats specific to their domain, allowing them to curate discussions, events, or topics relevant to their audience. 
-<br>:space_invader:
-<br>:crystal_ball:
+<br>:crystal_ball: ***Domain-specific Chat Creation:*** We develop an extension where domain owners can easily create official additional chats specific to their domain, allowing them to curate discussions, events, or topics relevant to their audience.
+<br>:space_invader:***Limited User Interaction and Engagement:*** Users often face challenges in engaging with chat content beyond basic messaging, such as reacting to messages, which limits their ability to express opinions and contribute meaningfully.
+<br>:crystal_ball:***Enhanced User Interaction Features:*** Our solution includes features such as message reactions (upvote/downvote), empowering users to express opinions, acknowledge valuable contributions, and participate actively in discussions.
+<br>:space_invader:***Inefficient Notification System:*** Existing chat systems may lack effective notification mechanisms, leading to missed messages or delays in responding to important communication.
+<br>:crystal_ball:***Efficient Notification Mechanism:*** We implement a light notification system that changes the background color of messages to indicate pings or replies, ensuring users are promptly notified of important communication without overwhelming them with constant alerts.
+<br>:space_invader:***Privacy Concerns in Communication:*** Users may desire more privacy in their chats, including the ability to have private conversations within the platform.
+<br>:crystal_ball:***Privacy-focused Communication:*** Our solution offers private chat functionalities, enabling users to initiate confidential conversations with selected individuals, enhancing privacy and fostering trust among users.
+<br>:space_invader:***Lack of Engaging Chat Experience:*** Many existing chat systems lack the interactive and gamified elements that appeal to modern users, resulting in a disconnect and disinterest among users who seek more engaging and entertaining communication platforms.
+<br>:crystal_ball:***Creating an Entertaining and Interactive Chat Experience:*** Stray is to redefine online communication by seamlessly integrating interactive and gamified elements. We aim to provide users with a captivating and entertaining experience that fosters deeper connections and active engagement.
+
+### ARCHITECTURE
+
+### FUTURE DEVELOPMENTS
+
+
