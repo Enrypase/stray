@@ -25,5 +25,11 @@ We propose a comprehensive solution to address these challenges. Our extension e
 ### ARCHITECTURE
 
 ### FUTURE DEVELOPMENTS
+- **Incorporating Gamification and Interactivity:** we will develop a chat system that incorporates gamification features such as avatars, badges, and airdrops rewards.
+- **Radio Function:** Adding a radio feature for users to listen to music or podcasts while chatting.
+- **Mood-based Themes & Styles:**  Introducing customizable themes and styles based on users' moods, ensuring a personalized chat experience.
+- **Fingerprint Login:** Enhancing security with fingerprint login authentication for seamless access.
+- **Fund Transfer Capability:**  Enabling users to transfer funds directly within the chat interface, facilitating seamless transactions.
+
 
 
