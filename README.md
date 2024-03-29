@@ -1,4 +1,4 @@
-# STRAY
+# STRAY ![Drag Racing](stray.thug.cat.jpg)
 ***extending conversations, shrinking miscommunication.***
 
 The go-to extension for every website, providing chat functionality to ensure privacy, facilitate engaging conversations, and beyond. 
