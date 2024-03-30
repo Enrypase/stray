@@ -18,7 +18,7 @@ const Message: Component<MessageType> = props => {
   const { setTab, setPrivateChats } = useChat();
   return (
     <div
-      class="grid grid-cols-2 p-2 rounded-md"
+      class="grid grid-cols-2 p-2 rounded-md animate-[fadeIn_0.5s_ease-out_forwards]"
       classList={{
         "bg-blue": props.message.includes(`@${address()}`),
       }}>
