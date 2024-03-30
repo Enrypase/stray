@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "solid-js": "^1.8.11",
-    "viem": "^2.9.4"
+    "viem": "^2.9.4",
+    "@metamask/providers": "^16.0.0"
   }
 }

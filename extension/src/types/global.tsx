@@ -1,8 +1,9 @@
 import { JSX } from "solid-js/jsx-runtime";
+import { MetaMaskInpageProvider } from "@metamask/providers/dist/types/MetaMaskInpageProvider";
 
 declare global {
   interface Window {
-    ethereum?: any;
+    ethereum: MetaMaskInpageProvider;
   }
 }
 

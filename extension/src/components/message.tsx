@@ -10,15 +10,15 @@ type MessageType = {
   image: string;
   lastMessage: Accessor<string>;
   setLastMessage: Setter<string>;
-  inputRef: Accessor<HTMLInputElement | null>;
+  inputRef: Accessor<HTMLInputElement | undefined>;
 };
 
 const Message: Component<MessageType> = props => {
   const { address } = useSession();
-  const { setTab, setPrivateChats, privateChats } = useChat();
+  const { setTab, setPrivateChats } = useChat();
   return (
     <div
-      class="grid grid-cols-2 p-2 rounded-md"
+      class="grid grid-cols-2 p-2 rounded-md animate-[fadeIn_0.5s_ease-out_forwards]"
       classList={{
         "bg-blue": props.message.includes(`@${address()}`),
       }}>

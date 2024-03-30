@@ -22,7 +22,9 @@ export const SessionProvider: Component<WithChildren> = props => {
 
   onMount(() => {
     if (!chrome.runtime) {
-      const data = JSON.parse(localStorage.getItem("data"));
+      const rawData = localStorage.getItem("data");
+      if (!rawData) return;
+      const data = JSON.parse(rawData) as string;
       if (!data) return;
       setLocation(window.location.toString());
       setAddress(data);
@@ -31,12 +33,10 @@ export const SessionProvider: Component<WithChildren> = props => {
     chrome.storage.local
       .get("data")
       .then(({ data }) => {
-        console.log("GOT ", data);
         if (!data) return;
         chrome.tabs
           .query({ active: true, currentWindow: true })
           .then(tab => {
-            console.log(tab[0].url);
             setLocation(tab[0].url!);
             setAddress(data);
           })
@@ -55,7 +55,6 @@ export const SessionProvider: Component<WithChildren> = props => {
     chrome.tabs
       .query({ active: true, currentWindow: true })
       .then(tab => {
-        console.log(tab[0].url);
         setLocation(tab[0].url!);
       })
       .catch(err => {

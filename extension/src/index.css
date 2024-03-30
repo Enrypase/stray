@@ -2,8 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+#root {
   background-color: black;
+  width: max-content;
 }
 
 body {
