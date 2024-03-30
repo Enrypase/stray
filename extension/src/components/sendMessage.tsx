@@ -2,8 +2,8 @@ import { Accessor, Component, Setter, onMount } from "solid-js";
 
 type SendMessageType = {
   sendMessage: (param: string) => void;
-  inputRef: Accessor<HTMLInputElement | null>;
-  setInputRef: Setter<HTMLInputElement>;
+  inputRef: Accessor<HTMLInputElement | undefined>;
+  setInputRef: Setter<HTMLInputElement | undefined>;
   lastMessage: Accessor<string>;
   setLastMessage: Setter<string>;
 };
