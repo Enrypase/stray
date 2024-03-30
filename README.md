@@ -45,7 +45,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 
 
 ### :building_construction: ARCHITECTURE
-![High-level](assets/architecture.png)
+![High-level](arch.png)
 
 #### Deployments
 | Name | Deployments |
