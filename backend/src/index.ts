@@ -75,7 +75,7 @@ const server = Bun.serve<{ username: string }>({
         console.log("Chatting with: ", chatWith);
         const updatedUsername = chatWith ? username : `${username}_${Date.now()}`;
         let chat = url.pathname.split("/")[2] || "";
-        if (chatWith) {
+        if (chatWith && chatWith.toLowerCase() !== "me" && chatWith.toLowerCase() !== "server") {
           const foundChat = Object.keys(privateChats).filter(
             key => key.includes(username) && key.includes(chatWith)
           )[0];
@@ -122,7 +122,7 @@ const server = Bun.serve<{ username: string }>({
   },
   websocket: {
     open(ws) {
-      const { chatWith } = ws.data;
+      const { chatWith } = ws.data as WsData;
       console.log("This ws wants to chat with ", chatWith);
       if (chatWith) {
         const chat = Object.keys(privateChats).filter(
@@ -151,7 +151,7 @@ const server = Bun.serve<{ username: string }>({
       const { type, message } = JSON.parse(String(rawMex));
       if (type === "auth") {
       } else if (type === "message") {
-        const { username, chatWith } = ws.data;
+        const { username, chatWith } = ws.data as WsData;
         console.log("This ws wants to send message exclusively to ", chatWith);
         if (chatWith) {
           const chat = Object.keys(privateChats).filter(
@@ -188,7 +188,7 @@ const server = Bun.serve<{ username: string }>({
       }
     },
     close(ws) {
-      const { chatWith } = ws.data;
+      const { chatWith } = ws.data as WsData;
       console.log("Blud closed the chat with ", chatWith);
       if (chatWith) {
         const chat = Object.keys(privateChats).filter(

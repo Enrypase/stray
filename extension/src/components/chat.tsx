@@ -22,7 +22,7 @@ const Chat: Component<LoggedCompType> = props => {
   return (
     <ChatLayout>
       <Header title={beautifyUrl(location())} />
-      <div class="flex flex-col justify-between h-[calc(100%-42px)]">
+      <div class="flex flex-col justify-between h-[calc(100%-66px)]">
         <div class="flex flex-col gap-2 overflow-auto">
           <For each={props.messages}>
             {message => (

@@ -11,7 +11,7 @@ const Header: Component<HeaderType> = props => {
   const { address } = useSession();
   const { privateChats, setTab, tab } = useChat();
   return (
-    <div class="flex justify-between w-[325px] border-b-2 border-solid border-white p-2">
+    <div class="flex h-[66px] justify-between w-[325px] border-b-2 border-solid border-white p-2">
       <div class="flex gap-2">
         <For each={privateChats}>
           {chat => (

@@ -1,4 +1,4 @@
-import { Component, createEffect, createSignal } from "solid-js";
+import { Component, createEffect, createSignal, on } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useChat } from "../hooks/useChat";
 import Chat from "./chat";
@@ -14,12 +14,27 @@ const LoggedComp: Component = () => {
   const { tab } = useChat();
   const { location, address } = useSession();
   const [messages, setMessages] = createStore([] as MessageType[]);
-  const [ws, setWs] = createSignal(createNewWs());
+  const [ws, setWs] = createSignal(createNewWs(beautifyUrl(tab() || location())));
 
-  function createNewWs() {
+  createEffect(
+    on(tab, val => {
+      val = beautifyUrl(val);
+      if (!tab() || ws().url === `ws://localhost:5000/chat/${val}`) return;
+      setWs(createNewWs(val));
+    }),
+  );
+  createEffect(
+    on(location, val => {
+      val = beautifyUrl(val);
+      if (ws().url === `ws://localhost:5000/chat/${val}`) return;
+      setWs(createNewWs(val));
+    }),
+  );
+
+  function createNewWs(str: string) {
     console.log("Creating new ws");
 
-    let url = `ws://localhost:5000/chat/${beautifyUrl(location())}`;
+    let url = `ws://localhost:5000/chat/${str}`;
     if (tab()) {
       url += `?chatWith=${tab()}`;
     }
@@ -64,19 +79,12 @@ const LoggedComp: Component = () => {
     return newWs;
   }
 
-  createEffect(() => {
-    console.log(tab());
-    if (ws().url !== `ws://localhost:5000/chat/${beautifyUrl(location())}`) {
-      setWs(createNewWs());
-    }
-  });
-
   const sendMessage = (message: string) => {
     console.log(message, isReady(), ws().readyState);
     if (!message) return;
     if (ws().readyState === 3 || ws().readyState === 2) {
       queue.push(message);
-      setWs(createNewWs());
+      setWs(createNewWs(tab() || location()));
     } else if (!isReady() || ws().readyState === 0) {
       queue.push(message);
     } else {
