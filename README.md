@@ -1,7 +1,7 @@
 # STRAY 
 ***Extending conversations, shrinking miscommunication.***
 
-The go-to extension for every website, providing chat functionality to ensure privacy, facilitate engaging conversations, and beyond. 
+The go-to extension for every website, providing chat functionality to ensure privacy, facilitate engaging conversations and beyond. 
 
 ### :space_invader: PROBLEM
 Current chat systems suffer from several limitations: they lack domain-specific functionality, resulting in a disconnect between users and their intended audience.
