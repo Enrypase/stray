@@ -19,29 +19,24 @@ const LoggedComp: Component = () => {
   const { tab } = useChat();
   const { location, address } = useSession();
   const [messages, setMessages] = createStore([] as MessageType[]);
-  const [numMessages, setNumMessages] = createSignal(messages);
+  const [numMessages] = createSignal(messages);
   const [ws, setWs] = createSignal(createNewWs(beautifyUrl(tab() || location())));
 
-  createEffect(
-    on(tab, val => {
-      val = beautifyUrl(val);
-      if (!tab() || ws().url === `ws://localhost:5000/chat/${val}`) return;
-      if (ws()) {
-        ws().close();
-      }
-      setWs(createNewWs(val));
-    }),
-  );
-  createEffect(
-    on(location, val => {
-      val = beautifyUrl(val);
-      if (ws().url === `ws://localhost:5000/chat/${val}`) return;
-      if (ws()) {
-        ws().close();
-      }
-      setWs(createNewWs(val));
-    }),
-  );
+  createEffect(() => {
+    console.log("EFFECT CREATED");
+    const val = beautifyUrl(location());
+    let url = `ws://localhost:5000/chat/${val}`;
+    if (tab()) {
+      url += `?chatWith=${tab()}`;
+    }
+    if (ws().url === url) return;
+    if (ws()) {
+      console.log("Closing");
+      ws().close();
+    }
+    console.log("Effect finished");
+    setWs(createNewWs(val));
+  });
 
   function createNewWs(str: string) {
     console.log("Creating new ws");
