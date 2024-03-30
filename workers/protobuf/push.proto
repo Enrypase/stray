@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package grpc.sync.push;
+
+message PushRequest {
+    string chat;
+}
+
+message PushResponse {
+    string count;
+}
+
+service PushService {
+    rpc Push(PushRequest) returns (PushResponse) {}
+}

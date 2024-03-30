@@ -23,7 +23,10 @@ We propose a comprehensive solution to address these challenges. Our extension e
 <br>:crystal_ball:***Creating an Entertaining and Interactive Chat Experience:*** Stray is to redefine online communication by seamlessly integrating interactive and gamified elements. We aim to provide users with a captivating and entertaining experience that fosters deeper connections and active engagement.
 
 ### ARCHITECTURE
+[High-level overview](assets/architecture.svg)
 
+### DEPLOYMENTS
+|Name|Arbitrum Sepolia|
 ### FUTURE DEVELOPMENTS
 - **Incorporating Gamification and Interactivity:** we will develop a chat system that incorporates gamification features such as avatars, badges, and airdrops rewards.
 - **Radio Function:** Adding a radio feature for users to listen to music or podcasts while chatting.
@@ -31,5 +34,10 @@ We propose a comprehensive solution to address these challenges. Our extension e
 - **Fingerprint Login:** Enhancing security with fingerprint login authentication for seamless access.
 - **Fund Transfer Capability:**  Enabling users to transfer funds directly within the chat interface, facilitating seamless transactions.
 
-
-
+# Run instructions
+For setting up the backend, run
+...
+For starting the frontend, run
+...
+Spin a Redis local instance by
+docker compose up -d

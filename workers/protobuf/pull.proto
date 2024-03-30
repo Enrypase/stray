@@ -1,0 +1,16 @@
+syntex = "proto3";
+
+package grpc.sync.pull;
+
+message PullRequest {
+    string chat;
+    int since;
+}
+
+message PullResponse {
+    int count;
+}
+
+service PullService {
+    rpc Pull(PullRequest) returns (PullResponse) {}
+}
