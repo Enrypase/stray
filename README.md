@@ -45,7 +45,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 
 
 ### :building_construction: ARCHITECTURE
-[High-level](assets/architecture.svg)
+[High-level](assets/architecture.png)
 
 #### Deployments
 | Name | Arbitrum Testnet | Base Testnet |
