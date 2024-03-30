@@ -1,11 +1,16 @@
-import { Component, createEffect, createSignal, on } from "solid-js";
+import { Accessor, Component, createEffect, createSignal, on } from "solid-js";
 import { createStore } from "solid-js/store";
 import { useChat } from "../hooks/useChat";
 import Chat from "./chat";
 import { beautifyAddress, beautifyUrl } from "../common/commonFunctions";
 import { useSession } from "../hooks/useSession";
 
-type MessageType = { username: string; message: string; image: string };
+type MessageType = {
+  username: string;
+  message: string;
+  image: string;
+  numMessages: Accessor<number>;
+};
 
 const LoggedComp: Component = () => {
   let queue: string[] = [];
@@ -14,12 +19,16 @@ const LoggedComp: Component = () => {
   const { tab } = useChat();
   const { location, address } = useSession();
   const [messages, setMessages] = createStore([] as MessageType[]);
+  const [numMessages, setNumMessages] = createSignal(messages);
   const [ws, setWs] = createSignal(createNewWs(beautifyUrl(tab() || location())));
 
   createEffect(
     on(tab, val => {
       val = beautifyUrl(val);
       if (!tab() || ws().url === `ws://localhost:5000/chat/${val}`) return;
+      if (ws()) {
+        ws().close();
+      }
       setWs(createNewWs(val));
     }),
   );
@@ -27,6 +36,9 @@ const LoggedComp: Component = () => {
     on(location, val => {
       val = beautifyUrl(val);
       if (ws().url === `ws://localhost:5000/chat/${val}`) return;
+      if (ws()) {
+        ws().close();
+      }
       setWs(createNewWs(val));
     }),
   );
@@ -84,6 +96,7 @@ const LoggedComp: Component = () => {
     if (!message) return;
     if (ws().readyState === 3 || ws().readyState === 2) {
       queue.push(message);
+      ws().close();
       setWs(createNewWs(tab() || location()));
     } else if (!isReady() || ws().readyState === 0) {
       queue.push(message);
@@ -110,6 +123,7 @@ const LoggedComp: Component = () => {
       sendMessage={sendMessage}
       lastMessage={lastMessage}
       setLastMessage={setLastMessage}
+      numMessages={numMessages}
     />
   );
 };
