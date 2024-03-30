@@ -47,6 +47,13 @@ We propose a comprehensive solution to address these challenges. Our extension e
 ### :building_construction: ARCHITECTURE
 [High-level](assets/architecture.svg)
 
+#### Deployments
+| Name | Arbitrum Testnet | Base Testnet |
+|------|------------------|--------------|
+| Interflow | *TBA* | *TBA* |
+| SubflowFactory | *TBA* | *TBA* |
+| Subflow | *TBA* | *TBA* |
+
 ### :fist_right: :fist_left: PARTNERSHIPS AND MONETIZATION
 - ***Protocol and Project Partnerships:***
 <br>- Stray Chat aims to partner with various protocols and projects to incentivize user engagement. For instance, active users during specified times in the chat may receive airdrops or rewards in collaboration with partner projects.
