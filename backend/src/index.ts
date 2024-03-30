@@ -138,6 +138,7 @@ const server = Bun.serve<{ username: string }>({
       }
       const chat: string = usernames[ws.data.username].chat;
       ws.subscribe(chat);
+      console.log("CHAT: ", chat);
       redis.hGet("chats", chat).then(rawData => {
         console.log("Should sync", rawData);
         if (!rawData) return;
