@@ -28,9 +28,10 @@ const Message: Component<MessageType> = props => {
           onClick={() => {
             if (props.username.toLowerCase() === "me") return;
             setTab(props.username);
+            const newObj = { with: props.username, image: props.image || gattoFiero };
             setPrivateChats(prev => [
-              ...prev,
-              { with: props.username, image: props.image || gattoFiero },
+              ...prev.filter(old => JSON.stringify(old) !== JSON.stringify(newObj)),
+              newObj,
             ]);
           }}>
           {props.username.toLowerCase() !== "server" && (
