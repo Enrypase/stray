@@ -45,6 +45,7 @@ We propose a comprehensive solution to address these challenges. Our extension e
 
 
 ### :building_construction: ARCHITECTURE
+[High-level](assets/architecture.svg)
 
 ### :fist_right: :fist_left: PARTNERSHIPS AND MONETIZATION
 - ***Protocol and Project Partnerships:***
@@ -63,5 +64,5 @@ We propose a comprehensive solution to address these challenges. Our extension e
 - ***Fund Transfer Capability:***  Enabling users to transfer funds directly within the chat interface, facilitating seamless transactions.
 
 
-<br>![Drag Racing](stray.thug.cat.png)
+<br>![Drag Racing](assets/stray.thug.cat.png)
 
