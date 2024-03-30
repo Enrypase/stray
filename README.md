@@ -49,8 +49,8 @@ We propose a comprehensive solution to address these challenges. Our extension e
 
 #### Deployments
 | Name | Deployments |
-|------|------------------|--------------|
-| Interflow | [Arbitrum](https://sepolia.arbiscan.io/address/0x2a858e44dF145C405c81d1C2BC46AEB74878c1a7)/[Base](https://sepolia.basescan.org/address/0x2a858e44df145c405c81d1c2bc46aeb74878c1a7)|
+|------|--------------|
+| Interflow | [Arbitrum](https://sepolia.arbiscan.io/address/0x2a858e44dF145C405c81d1C2BC46AEB74878c1a7)/[Base](https://sepolia.basescan.org/address/0x2a858e44df145c405c81d1c2bc46aeb74878c1a7) |
 | SubflowFactory | [Arbitrum](https://sepolia.arbiscan.io/address/0xB2AA7F204b579CF4899239B0648DbFC7666A1d9e)/[Base](https://sepolia.basescan.org/address/0xB2AA7F204b579CF4899239B0648DbFC7666A1d9e) |
 | Subflow (Mock) | [Arbitrum](https://sepolia.arbiscan.io/address/0xB72E172F5De80727c3D9f4435C3338E1Ee5A5b23)/[Base](https://sepolia.basescan.org/address/0xB72E172F5De80727c3D9f4435C3338E1Ee5A5b23) |
 
