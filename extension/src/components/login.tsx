@@ -37,6 +37,11 @@ const LoginComp: Component = () => {
 
     */
     setAddress(data);
+    if (!chrome.runtime) {
+      localStorage.setItem("data", JSON.stringify(data));
+      return;
+    }
+    await chrome.storage.local.set({ data });
   };
 
   return (

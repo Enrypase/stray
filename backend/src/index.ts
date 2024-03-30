@@ -88,9 +88,7 @@ const server = Bun.serve<{ username: string }>({
         usernames[updatedUsername] = { ready: false, username, chat, image: "" };
         parseUsername(username).then(newUsername => {
           getUserImage(newUsername).then(image => {
-            console.log("\n\n\n\n\n");
             console.log("Sending connection mex to chat: ", chat);
-            console.log("\n\n\n\n\n");
 
             usernames[updatedUsername] = {
               ready: true,
@@ -141,6 +139,7 @@ const server = Bun.serve<{ username: string }>({
       const chat: string = usernames[ws.data.username].chat;
       ws.subscribe(chat);
       redis.hGet("chats", chat).then(rawData => {
+        console.log("Should sync", rawData);
         if (!rawData) return;
         const messages: MessageType[] = JSON.parse(rawData);
         messages.map(message => {
