@@ -60,10 +60,7 @@ const LoggedComp: Component = () => {
     newWs.onmessage = (event: MessageEvent) => {
       const messageData = JSON.parse(String(event.data)) as MessageType;
       console.log("REC: ", messageData);
-      if (
-        messageData.username === "Server" &&
-        messageData.message === `${beautifyAddress(address())} connected`
-      ) {
+      if (messageData.username === "Server") {
         setReady(true); // Only when the connection address is received start to send messages
         // TODO: Handle this case better with more decent protocol
         return;
