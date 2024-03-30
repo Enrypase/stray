@@ -46,6 +46,12 @@ We propose a comprehensive solution to address these challenges. Our extension e
 
 ### :building_construction: ARCHITECTURE
 [High-level](assets/architecture.svg)
+#### Deployments
+| Name | Arbitrum Testnet | Base Testnet |
+|------|------------------|--------------|
+| Interflow | *TBA* | *TBA* |
+| SubflowFactory | *TBA* | *TBA* |
+| Subflow | *TBA* | *TBA* |
 
 ### :fist_right: :fist_left: PARTNERSHIPS AND MONETIZATION
 - ***Protocol and Project Partnerships:***
